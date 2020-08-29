@@ -1,10 +1,12 @@
 package com.opticasantaclara.admin.entities;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -23,6 +25,9 @@ public class Paciente {
     private Date fechaDeNacimiento;
     @Column
     private TipoDePaciente tipoDePaciente;
+
+    @OneToMany(mappedBy = "paciente")
+    private List<HistoriaClinica> historiasClinicas;
 
     public Paciente() {
     }
@@ -74,6 +79,14 @@ public class Paciente {
 
     public void setTipoDePaciente(TipoDePaciente tipoDePaciente) {
         this.tipoDePaciente = tipoDePaciente;
+    }
+
+    public List<HistoriaClinica> getHistoriasClinicas() {
+        return historiasClinicas;
+    }
+
+    public void setHistoriaClinicas(List<HistoriaClinica> historiasClinicas) {
+        this.historiasClinicas = historiasClinicas;
     }
 
     

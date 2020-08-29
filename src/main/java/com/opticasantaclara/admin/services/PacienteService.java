@@ -2,7 +2,9 @@ package com.opticasantaclara.admin.services;
 
 import java.util.List;
 
+import com.opticasantaclara.admin.entities.HistoriaClinica;
 import com.opticasantaclara.admin.entities.Paciente;
+import com.opticasantaclara.admin.repositories.HistoriaClinicaRepository;
 import com.opticasantaclara.admin.repositories.PacienteRepository;
 import com.opticasantaclara.admin.repositoriesServices.IPacienteService;
 
@@ -13,6 +15,9 @@ import org.springframework.stereotype.Service;
 public class PacienteService implements IPacienteService {
     @Autowired
     private PacienteRepository pRepository;
+
+    @Autowired
+    private HistoriaClinicaRepository hcRepository;
 
     @Override
     public Paciente saveOrUpdate(Paciente paciente) {
@@ -36,6 +41,29 @@ public class PacienteService implements IPacienteService {
     public Paciente findByCedula(int cedula) {
 
         return pRepository.getOne(cedula);
+    }
+
+    @Override
+    public List<HistoriaClinica> findHiClinicasByPaciente(Paciente paciente) {
+        
+        return hcRepository.findHiClinicasByPaciente(paciente.getCedula());
+    }
+
+    @Override
+    public HistoriaClinica crearOEditarHiClinica(HistoriaClinica historiaClinica) {
+        
+        return hcRepository.save(historiaClinica);
+    }
+
+    @Override
+    public void eliminarHiClinica(int id) {
+        hcRepository.deleteById(id);
+    }
+
+    @Override
+    public List<HistoriaClinica> listarHiClinicas() {
+        
+        return hcRepository.findAll();
     }
     
 }
