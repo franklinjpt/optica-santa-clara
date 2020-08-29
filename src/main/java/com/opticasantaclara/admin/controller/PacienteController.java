@@ -2,6 +2,7 @@ package com.opticasantaclara.admin.controller;
 
 import java.util.List;
 
+import com.opticasantaclara.admin.entities.HistoriaClinica;
 import com.opticasantaclara.admin.entities.Paciente;
 import com.opticasantaclara.admin.repositoriesServices.IPacienteService;
 
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -42,5 +44,54 @@ public class PacienteController {
 		Paciente  PacienteEditado = pService.saveOrUpdate(Paciente);		
 		
 		return new ResponseEntity<Paciente>(PacienteEditado,HttpStatus.CREATED);
+    }
+
+    @GetMapping("/hiclinica-paciente/{pacientes}")
+	public ResponseEntity<List<HistoriaClinica>> getHiClinicasByPaciente(@PathVariable("pacientes") int cedula){
+		Paciente  paciente = pService.findByCedula(cedula);
+		
+		List<HistoriaClinica> historiasClinicas= pService.findHiClinicasByPaciente(paciente);
+		if(historiasClinicas != null) {
+		return new ResponseEntity<List<HistoriaClinica>>(historiasClinicas,HttpStatus.OK);
+			
+		
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	}
+    
+    @PostMapping("/hiClinica-paciente/{cedula}")
+	public ResponseEntity<HistoriaClinica> crearHiClinica(@Validated @RequestBody HistoriaClinica historiaClinica,
+            @PathVariable int cedula) {
+		
+		Paciente  paciente = pService.findByCedula(cedula);
+		if(paciente != null) {
+			
+			historiaClinica.setPaciente(paciente);
+			
+			HistoriaClinica nuevaHiClinica = pService.crearOEditarHiClinica(historiaClinica);
+			
+			return new ResponseEntity<HistoriaClinica>(nuevaHiClinica,HttpStatus.CREATED);
+		}
+			
+		
+		return  null;
+	}
+
+    @PutMapping("/hiClinica-paciente/{cedula}")
+	public ResponseEntity<HistoriaClinica> editarHiClinica(@Validated @RequestBody HistoriaClinica historiaClinica,
+            @PathVariable int cedula) {
+		
+		Paciente  paciente = pService.findByCedula(cedula);
+		if(paciente != null) {
+			
+			historiaClinica.setPaciente(paciente);
+			
+			HistoriaClinica nuevaHiClinica = pService.crearOEditarHiClinica(historiaClinica);
+			
+			return new ResponseEntity<HistoriaClinica>(nuevaHiClinica,HttpStatus.CREATED);
+		}
+			
+		
+		return  null;
 	}
 }
