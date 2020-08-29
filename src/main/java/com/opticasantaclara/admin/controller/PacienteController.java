@@ -59,7 +59,7 @@ public class PacienteController {
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
     
-    @PostMapping("/hiClinica-paciente/{cedula}")
+    @PostMapping("/hiclinica-paciente/{cedula}")
 	public ResponseEntity<HistoriaClinica> crearHiClinica(@Validated @RequestBody HistoriaClinica historiaClinica,
             @PathVariable int cedula) {
 		
@@ -77,7 +77,7 @@ public class PacienteController {
 		return  null;
 	}
 
-    @PutMapping("/hiClinica-paciente/{cedula}")
+    @PutMapping("/hiclinica-paciente/{cedula}")
 	public ResponseEntity<HistoriaClinica> editarHiClinica(@Validated @RequestBody HistoriaClinica historiaClinica,
             @PathVariable int cedula) {
 		
