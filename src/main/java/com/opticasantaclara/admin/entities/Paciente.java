@@ -21,16 +21,19 @@ public class Paciente {
     @JsonFormat(pattern="dd-MM-yyyy")
     @Column
     private Date fechaDeNacimiento;
+    @Column
+    private TipoDePaciente tipoDePaciente;
 
     public Paciente() {
     }
 
-    public Paciente(Integer cedula, String nombre, String apellido, Date fechaDeNacimiento) {
+    public Paciente(Integer cedula, String nombre, String apellido, Date fechaDeNacimiento, TipoDePaciente tipoDePaciente) {
         super();
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
         this.fechaDeNacimiento = fechaDeNacimiento;
+        this.tipoDePaciente=tipoDePaciente;
     }
 
     public Integer getCedula() {
@@ -63,6 +66,14 @@ public class Paciente {
 
     public void setFechaDeNacimiento(Date fechaDeNacimiento) {
         this.fechaDeNacimiento = fechaDeNacimiento;
+    }
+
+    public TipoDePaciente getTipoDePaciente() {
+        return tipoDePaciente;
+    }
+
+    public void setTipoDePaciente(TipoDePaciente tipoDePaciente) {
+        this.tipoDePaciente = tipoDePaciente;
     }
 
     
