@@ -6,6 +6,7 @@ import com.opticasantaclara.admin.entities.HistoriaClinica;
 import com.opticasantaclara.admin.entities.Paciente;
 import com.opticasantaclara.admin.repositoriesServices.IPacienteService;
 
+import org.aspectj.weaver.ast.Var;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,7 +58,32 @@ public class PacienteController {
 		
 		}
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+	
+    @GetMapping("/hiclinica-paciente/{cedula}/{id}")
+	public ResponseEntity<HistoriaClinica> getHiClinicasByPacienteAndId(@PathVariable("cedula") Integer cedula, @PathVariable("id") Integer id){
+		Paciente  paciente = pService.findByCedula(cedula);
+		HistoriaClinica hiClinicaId = pService.findByIdHiclinica(id);
+		
+		HistoriaClinica historiaClinica = pService.findHiClinicasByPacienteAndId(paciente, hiClinicaId);
+		if(historiaClinica != null) {
+		return new ResponseEntity<HistoriaClinica>(historiaClinica,HttpStatus.OK);
+			
+		
+		}
+		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 	}
+	 
+	// Esto es una prueba de los path
+	@GetMapping(path="/{name}/{age}")
+    public String getMessage(@PathVariable("name") String name, 
+            @PathVariable("age") String age) {
+        
+        String msg = String.format("%s is %s years old", name, age);
+        
+        return msg;
+    }
+    
     
     @PostMapping("/hiclinica-paciente/{cedula}")
 	public ResponseEntity<HistoriaClinica> crearHiClinica(@Validated @RequestBody HistoriaClinica historiaClinica,

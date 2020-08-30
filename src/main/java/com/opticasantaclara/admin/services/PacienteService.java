@@ -26,7 +26,7 @@ public class PacienteService implements IPacienteService {
     }
 
     @Override
-    public void delete(int id) {
+    public void delete(Integer id) {
         pRepository.deleteById(id);
 
     }
@@ -38,7 +38,7 @@ public class PacienteService implements IPacienteService {
     }
 
     @Override
-    public Paciente findByCedula(int cedula) {
+    public Paciente findByCedula(Integer cedula) {
 
         return pRepository.getOne(cedula);
     }
@@ -56,7 +56,7 @@ public class PacienteService implements IPacienteService {
     }
 
     @Override
-    public void eliminarHiClinica(int id) {
+    public void eliminarHiClinica(Integer id) {
         hcRepository.deleteById(id);
     }
 
@@ -64,6 +64,18 @@ public class PacienteService implements IPacienteService {
     public List<HistoriaClinica> listarHiClinicas() {
         
         return hcRepository.findAll();
+    }
+
+    @Override
+    public HistoriaClinica findHiClinicasByPacienteAndId(Paciente paciente, HistoriaClinica hiclinica) {
+        
+        return hcRepository.findHiClinicasByPacienteAndId(paciente.getCedula(), hiclinica.getId());
+    }
+
+    @Override
+    public HistoriaClinica findByIdHiclinica(Integer id) {
+        
+        return hcRepository.getOne(id);
     }
     
 }
