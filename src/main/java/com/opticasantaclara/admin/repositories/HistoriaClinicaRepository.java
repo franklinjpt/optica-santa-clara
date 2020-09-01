@@ -11,9 +11,9 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface HistoriaClinicaRepository extends JpaRepository<HistoriaClinica, Integer >{
-    @Query("Select hc FROM HistoriaClinica hc WHERE hc.paciente.cedula = :cedula")
+    @Query("SELECT hc FROM HistoriaClinica hc WHERE hc.paciente.cedula = :cedula")
     List<HistoriaClinica> findHiClinicasByPaciente(@Param("cedula")Integer pacienteCedula);
 
-    @Query("Select hc FROM HistoriaClinica hc WHERE hc.paciente.cedula = :cedula AND  hc.id=:id" )
-    HistoriaClinica findHiClinicasByPacienteAndId(@Param("cedula")Integer pacienteCedula,@Param("id")Integer hiClinicaId);
+    @Query(value = "SELECT * FROM historiasclinicas hc INNER JOIN pacientes pa ON hc.cedula_paciente = pa.cedula WHERE hc.id=:id", nativeQuery = true)
+    HistoriaClinica findHiClinicasById(@Param("id")Integer hiClinicaId);
 }

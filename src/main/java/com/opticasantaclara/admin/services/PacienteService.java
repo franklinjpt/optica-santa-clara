@@ -67,9 +67,9 @@ public class PacienteService implements IPacienteService {
     }
 
     @Override
-    public HistoriaClinica findHiClinicasByPacienteAndId(Paciente paciente, HistoriaClinica hiclinica) {
+    public HistoriaClinica findHiClinicasById(HistoriaClinica hiclinica) {
         
-        return hcRepository.findHiClinicasByPacienteAndId(paciente.getCedula(), hiclinica.getId());
+        return hcRepository.findHiClinicasById(hiclinica.getId());
     }
 
     @Override

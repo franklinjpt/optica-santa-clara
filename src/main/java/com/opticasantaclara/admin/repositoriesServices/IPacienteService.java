@@ -13,7 +13,7 @@ public interface IPacienteService {
     List<HistoriaClinica> findHiClinicasByPaciente(Paciente paciente);
 
     HistoriaClinica crearOEditarHiClinica(HistoriaClinica historiaClinica);
-    HistoriaClinica findHiClinicasByPacienteAndId(Paciente paciente, HistoriaClinica hiClinica);
+    HistoriaClinica findHiClinicasById(HistoriaClinica hiClinica);
     HistoriaClinica findByIdHiclinica(Integer id);
     void eliminarHiClinica(Integer id);
     List<HistoriaClinica>listarHiClinicas();
