@@ -43,6 +43,24 @@ public class HistoriaClinica {
     @JsonFormat(pattern = "dd-MM-yyyy")
     @Column
     private Date fechaProximaConsulta;
+    @Column
+    private double lensometriaEsferaOD;
+    @Column
+    private double lensometriaEsferaOI;
+    @Column
+    private double lensometriaCilindroOD;
+    @Column
+    private double lensometriaCilindroOI;
+    @Column
+    private double lensometriaEjeOD;
+    @Column
+    private double lensometriaEjeOI;
+    @Column
+    private double adicionLensometria;
+    @Column
+    private double avsc;
+
+
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
@@ -54,7 +72,9 @@ public class HistoriaClinica {
 
     public HistoriaClinica(Integer id, Date fechaDeConsulta, String motivoDeConsulta, String antecedentesPersonales,
             String antecedentesFamiliares, String medicamentosEnUso, String diagnostico, String tratamiento,
-            Date fechaProximaConsulta) {
+            Date fechaProximaConsulta, double lensometriaEsferaOD, double lensometriaEsferaOI,
+            double lensometriaCilindroOD, double lensometriaCilindroOI, double lensometriaEjeOD,
+            double lensometriaEjeOI, double adicionLensometria, double avsc, Paciente paciente) {
         this.id = id;
         this.fechaDeConsulta = fechaDeConsulta;
         this.motivoDeConsulta = motivoDeConsulta;
@@ -64,6 +84,15 @@ public class HistoriaClinica {
         this.diagnostico = diagnostico;
         this.tratamiento = tratamiento;
         this.fechaProximaConsulta = fechaProximaConsulta;
+        this.lensometriaEsferaOD = lensometriaEsferaOD;
+        this.lensometriaEsferaOI = lensometriaEsferaOI;
+        this.lensometriaCilindroOD = lensometriaCilindroOD;
+        this.lensometriaCilindroOI = lensometriaCilindroOI;
+        this.lensometriaEjeOD = lensometriaEjeOD;
+        this.lensometriaEjeOI = lensometriaEjeOI;
+        this.adicionLensometria = adicionLensometria;
+        this.avsc = avsc;
+        this.paciente = paciente;
     }
 
     public Integer getId() {
@@ -145,6 +174,72 @@ public class HistoriaClinica {
     public void setPaciente(Paciente paciente) {
         this.paciente = paciente;
     }
+
+    public double getLensometriaEsferaOD() {
+        return lensometriaEsferaOD;
+    }
+
+    public void setLensometriaEsferaOD(double lensometriaEsferaOD) {
+        this.lensometriaEsferaOD = lensometriaEsferaOD;
+    }
+
+    public double getLensometriaEsferaOI() {
+        return lensometriaEsferaOI;
+    }
+
+    public void setLensometriaEsferaOI(double lensometriaEsferaOI) {
+        this.lensometriaEsferaOI = lensometriaEsferaOI;
+    }
+
+    public double getLensometriaCilindroOD() {
+        return lensometriaCilindroOD;
+    }
+
+    public void setLensometriaCilindroOD(double lensometriaCilindroOD) {
+        this.lensometriaCilindroOD = lensometriaCilindroOD;
+    }
+
+    public double getLensometriaCilindroOI() {
+        return lensometriaCilindroOI;
+    }
+
+    public void setLensometriaCilindroOI(double lensometriaCilindroOI) {
+        this.lensometriaCilindroOI = lensometriaCilindroOI;
+    }
+
+    public double getLensometriaEjeOD() {
+        return lensometriaEjeOD;
+    }
+
+    public void setLensometriaEjeOD(double lensometriaEjeOD) {
+        this.lensometriaEjeOD = lensometriaEjeOD;
+    }
+
+    public double getLensometriaEjeOI() {
+        return lensometriaEjeOI;
+    }
+
+    public void setLensometriaEjeOI(double lensometriaEjeOI) {
+        this.lensometriaEjeOI = lensometriaEjeOI;
+    }
+
+    public double getAdicionLensometria() {
+        return adicionLensometria;
+    }
+
+    public void setAdicionLensometria(double adicionLensometria) {
+        this.adicionLensometria = adicionLensometria;
+    }
+
+    public double getAvsc() {
+        return avsc;
+    }
+
+    public void setAvsc(double avsc) {
+        this.avsc = avsc;
+    }
+
+    
 
     
 }
